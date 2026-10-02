@@ -96,17 +96,28 @@ export const getStudentProfile = (): StudentProfile => {
 
       const currentProgress = courses[activeCourseId] || defaultCourseProgress();
 
-      // Ensure free and review courses are always unlocked per user instructions
-      const defaultUnlocked: CourseId[] = [
-        'algoritma_pemrograman',
-        'web_framework',
-        'rekayasa_perangkat_lunak',
-        'sistem_operasi',
-        'pemrograman_berorientasi_objek'
-      ];
-      const existingUnlocked: CourseId[] = Array.isArray(parsed.unlockedCourses)
-        ? Array.from(new Set([...parsed.unlockedCourses, ...defaultUnlocked]))
-        : defaultUnlocked;
+      // Only algoritma_pemrograman is free by default per user command
+      const defaultUnlocked: CourseId[] = ['algoritma_pemrograman'];
+
+      // Sanitize stored unlocked courses: if not all-access, strip the 4 review courses that were auto-unlocked temporarily
+      let existingUnlocked: CourseId[] = defaultUnlocked;
+      if (Array.isArray(parsed.unlockedCourses)) {
+        if (parsed.isAllAccess) {
+          existingUnlocked = parsed.unlockedCourses;
+        } else {
+          // Remove temporary auto-unlocked courses from previous review step
+          const tempReviewCourses: CourseId[] = [
+            'web_framework',
+            'rekayasa_perangkat_lunak',
+            'sistem_operasi',
+            'pemrograman_berorientasi_objek'
+          ];
+          const filtered = parsed.unlockedCourses.filter(
+            (c: CourseId) => !tempReviewCourses.includes(c)
+          );
+          existingUnlocked = Array.from(new Set([...filtered, ...defaultUnlocked]));
+        }
+      }
 
       const rawSaweria = parsed.saweriaUsername;
       const saweriaUsername =
@@ -148,13 +159,7 @@ export const getStudentProfile = (): StudentProfile => {
       sistem_operasi: defaultCourseProgress(),
       pemrograman_berorientasi_objek: defaultCourseProgress()
     },
-    unlockedCourses: [
-      'algoritma_pemrograman',
-      'web_framework',
-      'rekayasa_perangkat_lunak',
-      'sistem_operasi',
-      'pemrograman_berorientasi_objek'
-    ], // Free and open for testing per user request
+    unlockedCourses: ['algoritma_pemrograman'], // ONLY algoritma_pemrograman is free
     isAllAccess: false,
     saweriaUsername: 'HasyhiRama',
     passedModules: [],
@@ -182,14 +187,8 @@ export const isCourseUnlocked = (
   profile: StudentProfile,
   courseId: CourseId
 ): boolean => {
-  // Always free courses & newly requested courses open for review before locking:
-  if (
-    courseId === 'algoritma_pemrograman' ||
-    courseId === 'web_framework' ||
-    courseId === 'rekayasa_perangkat_lunak' ||
-    courseId === 'sistem_operasi' ||
-    courseId === 'pemrograman_berorientasi_objek'
-  ) {
+  // ONLY algoritma_pemrograman is free without payment:
+  if (courseId === 'algoritma_pemrograman') {
     return true;
   }
   if (profile.isAllAccess) return true; // All-access bundle purchased

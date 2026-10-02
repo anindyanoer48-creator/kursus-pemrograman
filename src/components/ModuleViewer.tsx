@@ -381,7 +381,7 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
             </span>
           </div>
 
-          <pre className="p-4 font-mono text-xs text-slate-200 overflow-x-auto leading-relaxed">
+          <pre className="p-3.5 sm:p-4 font-mono text-[11px] sm:text-xs text-slate-200 overflow-x-auto leading-relaxed touch-pan-x">
             {section.codeSnippet.code}
           </pre>
 
@@ -398,13 +398,13 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
       </div>
 
       {/* Section Navigation Buttons */}
-      <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
+      <div className="mt-12 pt-6 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
         {prevSection ? (
           <button
             onClick={() => onSelectSection(module.id, prevSection.id)}
-            className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-semibold px-3 sm:px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 active:scale-95 transition-all"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 flex-shrink-0" />
             <span className="hidden sm:inline">Sebelumnya: {prevSection.title}</span>
             <span className="sm:hidden">Sebelumnya</span>
           </button>
@@ -415,19 +415,19 @@ export const ModuleViewer: React.FC<ModuleViewerProps> = ({
         {nextSection ? (
           <button
             onClick={() => onSelectSection(module.id, nextSection.id)}
-            className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-semibold px-3 sm:px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm active:scale-95 transition-all"
           >
             <span className="hidden sm:inline">Lanjut: {nextSection.title}</span>
             <span className="sm:hidden">Lanjut</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 flex-shrink-0" />
           </button>
         ) : (
           <button
             onClick={() => onCompleteMaterial(module.id, true)}
-            className="inline-flex items-center gap-2 text-xs font-semibold px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm transition-colors"
+            className="min-h-[44px] inline-flex items-center gap-1.5 text-xs font-semibold px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm active:scale-95 transition-all"
           >
-            <span>Selesaikan Materi & Buka Kuis</span>
-            <ArrowRight className="w-4 h-4" />
+            <span>Selesaikan & Buka Kuis</span>
+            <ArrowRight className="w-4 h-4 flex-shrink-0" />
           </button>
         )}
       </div>

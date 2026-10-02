@@ -290,11 +290,11 @@ export const HomePage: React.FC<HomePageProps> = ({
               <span>Akses Premium • QRIS Otomatis Saweria</span>
             </div>
             <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
-              Buka Semua Kursus (6 Bidang Studi) Hanya Rp 50.000
+              Buka Semua Kursus (10 Bidang Studi) Hanya Rp 50.000
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
               Dapatkan akses permanen ke materi lengkap, 100 soal kuis evaluasi, cheatsheet, dan sertifikat resmi tanpa batas. 
-              Tersedia juga opsi buka satuan seharga <strong>Rp 10.000 / kursus</strong>. Kursus <strong>Algoritma dan Pemrograman</strong> tetap 100% GRATIS untuk semua peserta!
+              Tersedia juga opsi buka satuan seharga <strong>Rp 10.000 / kursus</strong>. Kursus <strong>Algoritma & Pemrograman</strong> tetap 100% GRATIS untuk semua peserta!
             </p>
           </div>
 
@@ -429,7 +429,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         onSelectCourse(cId);
                         onNavigate('materi');
                       }}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1 transition-all ${
+                      className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all active:scale-95 ${
                         isSelected
                           ? `${style.btnActive} shadow-sm`
                           : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700'
@@ -444,7 +444,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         e.stopPropagation();
                         onOpenPayment(cId);
                       }}
-                      className="px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all bg-amber-500 hover:bg-amber-600 text-white shadow-sm"
+                      className="min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all bg-amber-500 hover:bg-amber-600 active:scale-95 text-white shadow-sm"
                     >
                       <Lock className="w-3.5 h-3.5" />
                       <span>Buka (Rp 10.000)</span>

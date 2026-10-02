@@ -168,6 +168,27 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         )}
 
+        {/* Mobile & Tablet Course Switcher Dropdown */}
+        {onSelectCourse && (
+          <div className="lg:hidden flex items-center">
+            <select
+              value={activeCourseId}
+              onChange={(e) => onSelectCourse(e.target.value as CourseId)}
+              className="max-w-[130px] sm:max-w-[180px] text-[11px] font-bold py-1.5 px-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 cursor-pointer truncate"
+              title="Pilih Kursus Aktif"
+            >
+              {courseList.map((cId) => {
+                const unlocked = isCourseUnlocked(profile, cId);
+                return (
+                  <option key={cId} value={cId}>
+                    {!unlocked ? '🔒 ' : ''}{COURSES[cId].shortTitle}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
+        )}
+
         {/* Dropdown for Medium Screens */}
         {onSelectCourse && (
           <div className="hidden lg:flex xl:hidden items-center">
@@ -188,7 +209,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
         )}
 
-        {/* Center Main Nav Links (Clean & Minimalist) */}
+        {/* Center Main Nav Links (Clean & Minimalist Desktop) */}
         <nav className="hidden md:flex items-center gap-1">
           <button
             onClick={() => onNavigate('home')}
@@ -252,29 +273,30 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Right Student ID & Settings */}
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2 sm:gap-2.5">
           {/* All-Access Status or Upgrade Button */}
           {profile.isAllAccess ? (
             <div
-              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-xs font-bold"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700 text-[11px] sm:text-xs font-bold"
               title="Akses Premium All-Access Aktif ke Seluruh Kursus"
             >
-              <Crown className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-              <span>All-Access</span>
+              <Crown className="w-3.5 h-3.5 text-amber-500 fill-amber-400 flex-shrink-0" />
+              <span className="hidden sm:inline">All-Access</span>
+              <span className="sm:hidden">VIP</span>
             </div>
           ) : onOpenPayment ? (
             <button
               onClick={() => onOpenPayment()}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold bg-amber-500 hover:bg-amber-600 active:scale-95 text-white shadow-sm transition-all"
+              className="flex items-center gap-1 px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-bold bg-amber-500 hover:bg-amber-600 active:scale-95 text-white shadow-sm transition-all"
               title="Buka Semua Kursus (Rp 50.000) via QRIS Saweria"
             >
-              <Crown className="w-3.5 h-3.5 text-amber-100" />
+              <Crown className="w-3.5 h-3.5 text-amber-100 flex-shrink-0" />
               <span className="hidden sm:inline">Upgrade (Rp 50k)</span>
-              <span className="sm:hidden">Upgrade</span>
+              <span className="sm:hidden">Beli</span>
             </button>
           ) : null}
 
-          {/* Student Auto-ID Badge */}
+          {/* Student Auto-ID Badge (Desktop) */}
           <div
             onClick={() => onNavigate('home')}
             className="cursor-pointer hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-xs hover:border-indigo-400 transition-colors"
@@ -284,7 +306,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               {profile.name.charAt(0)}
             </div>
             <div className="text-left font-mono">
-              <span className="font-bold text-slate-800 dark:text-slate-200 block truncate max-w-[120px]">
+              <span className="font-bold text-slate-800 dark:text-slate-200 block truncate max-w-[100px] lg:max-w-[120px]">
                 {profile.name}
               </span>
               <span className="text-[10px] text-slate-400 block -mt-0.5">
@@ -296,16 +318,16 @@ export const Navbar: React.FC<NavbarProps> = ({
           {/* Quick Progress Badge */}
           <button
             onClick={() => onNavigate(isAllPassed ? 'sertifikat' : 'kuis')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 border transition-all ${
+            className={`hidden xs:flex px-2 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs font-semibold items-center gap-1.5 border transition-all ${
               isAllPassed
                 ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800'
                 : 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800'
             }`}
           >
             {isAllPassed ? (
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              <CheckCircle2 className="w-3 h-3 text-emerald-500 flex-shrink-0" />
             ) : (
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
+              <span className="w-2 h-2 rounded-full bg-indigo-500 flex-shrink-0" />
             )}
             <span>{passedCount}/{totalModules} Lulus</span>
           </button>
@@ -325,59 +347,75 @@ export const Navbar: React.FC<NavbarProps> = ({
         </div>
       </div>
 
-      {/* Mobile Nav Sub-bar */}
-      <div className="md:hidden flex items-center justify-around px-2 py-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/40 text-xs">
+      {/* Modern Thumb-Friendly Mobile Fixed Bottom Navigation Bar */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 py-1 flex items-center justify-around pb-safe shadow-lg">
         <button
           onClick={() => onNavigate('home')}
-          className={`px-2 py-1 rounded-lg font-medium ${
+          className={`min-h-[48px] min-w-[56px] flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 transition-all active:scale-95 ${
             currentPage === 'home'
-              ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-              : 'text-slate-500'
+              ? 'text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50/80 dark:bg-indigo-950/60'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
-          Beranda
+          <Home className="w-4 h-4" />
+          <span className="text-[10px]">Beranda</span>
         </button>
+
         <button
           onClick={() => onNavigate('materi')}
-          className={`px-2 py-1 rounded-lg font-medium ${
+          className={`min-h-[48px] min-w-[56px] flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 transition-all active:scale-95 ${
             currentPage === 'materi'
-              ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-              : 'text-slate-500'
+              ? 'text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50/80 dark:bg-indigo-950/60'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
-          Materi
+          <FileText className="w-4 h-4" />
+          <span className="text-[10px]">Materi</span>
         </button>
+
         <button
           onClick={() => onNavigate('kuis')}
-          className={`px-2 py-1 rounded-lg font-medium ${
+          className={`min-h-[48px] min-w-[56px] flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 transition-all active:scale-95 relative ${
             currentPage === 'kuis'
-              ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-              : 'text-slate-500'
+              ? 'text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50/80 dark:bg-indigo-950/60'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
-          Kuis
+          <HelpCircle className="w-4 h-4" />
+          <span className="text-[10px]">Kuis</span>
+          {passedCount > 0 && (
+            <span className="absolute top-1 right-2 w-2 h-2 rounded-full bg-emerald-500" />
+          )}
         </button>
+
         <button
           onClick={() => onNavigate('cheatsheet')}
-          className={`px-2 py-1 rounded-lg font-medium ${
+          className={`min-h-[48px] min-w-[56px] flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 transition-all active:scale-95 ${
             currentPage === 'cheatsheet'
-              ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-              : 'text-slate-500'
+              ? 'text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50/80 dark:bg-indigo-950/60'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
-          Buku Rumus
+          <BookOpen className="w-4 h-4" />
+          <span className="text-[10px]">Rumus</span>
         </button>
+
         <button
           onClick={() => onNavigate('sertifikat')}
-          className={`px-2 py-1 rounded-lg font-medium ${
+          className={`min-h-[48px] min-w-[56px] flex flex-col items-center justify-center gap-0.5 rounded-xl px-2 py-1 transition-all active:scale-95 ${
             currentPage === 'sertifikat'
-              ? 'text-indigo-600 dark:text-indigo-400 font-bold'
-              : 'text-slate-500'
+              ? 'text-indigo-600 dark:text-indigo-400 font-bold bg-indigo-50/80 dark:bg-indigo-950/60'
+              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
-          Sertifikat
+          {isAllPassed ? (
+            <Award className="w-4 h-4 text-emerald-500" />
+          ) : (
+            <Lock className="w-4 h-4 text-slate-400" />
+          )}
+          <span className="text-[10px]">Sertifikat</span>
         </button>
-      </div>
+      </nav>
     </header>
   );
 };

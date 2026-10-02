@@ -129,7 +129,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
                 <span className="whitespace-pre-line leading-relaxed">{q.question}</span>
               </h4>
 
-              <div className="space-y-2 pl-9">
+              <div className="space-y-2 pl-0 sm:pl-9">
                 {q.options.map((opt, optIdx) => {
                   let optStyle =
                     'bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-200';
@@ -154,9 +154,9 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
                       key={optIdx}
                       onClick={() => handleSelect(q.id, optIdx)}
                       disabled={submitted}
-                      className={`w-full text-left p-3 rounded-lg text-xs leading-relaxed transition-all flex items-center justify-between ${optStyle}`}
+                      className={`w-full text-left p-3 rounded-xl text-xs leading-relaxed transition-all flex items-center justify-between min-h-[44px] active:scale-[0.99] ${optStyle}`}
                     >
-                      <span>{opt}</span>
+                      <span className="pr-2">{opt}</span>
                       {submitted && optIdx === q.correctAnswer && (
                         <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 stroke-[2.5] flex-shrink-0 ml-2" />
                       )}
@@ -170,7 +170,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
 
               {/* Explanation upon submit */}
               {submitted && (
-                <div className="mt-4 pl-9 pt-3 border-t border-slate-200 dark:border-slate-700 text-xs">
+                <div className="mt-4 pl-0 sm:pl-9 pt-3 border-t border-slate-200 dark:border-slate-700 text-xs">
                   <span className="font-mono font-semibold uppercase text-slate-600 dark:text-slate-400 block mb-1">
                     [PEMBAHASAN ILMIAH]:
                   </span>
@@ -187,9 +187,9 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
       {/* Bottom Action Bar */}
       <div className="mt-8 pt-5 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
         {submitted ? (
-          <div className="flex items-center gap-3">
+          <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <span
-              className={`text-xs font-semibold px-3 py-1.5 rounded-lg border ${
+              className={`text-xs font-semibold px-3 py-2 rounded-xl border text-center ${
                 passed
                   ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-700 dark:text-emerald-300'
                   : 'bg-rose-50 dark:bg-rose-950/40 border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300'
@@ -200,13 +200,13 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
 
             <button
               onClick={handleRetry}
-              className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 transition-colors shadow-sm"
+              className="min-h-[44px] inline-flex items-center justify-center gap-1.5 text-xs font-medium text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 active:scale-95 transition-all shadow-sm"
             >
               <RotateCcw className="w-3.5 h-3.5" /> Ulangi Kuis
             </button>
           </div>
         ) : (
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-xs text-slate-500 dark:text-slate-400 text-center sm:text-left">
             * Pilih jawaban untuk setiap soal sebelum menekan tombol kirim.
           </span>
         )}
@@ -215,7 +215,7 @@ export const QuizSection: React.FC<QuizSectionProps> = ({
           <button
             onClick={handleSubmit}
             disabled={!allAnswered}
-            className={`px-5 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all ${
+            className={`w-full sm:w-auto min-h-[44px] px-6 py-2.5 rounded-xl text-xs font-semibold tracking-wide transition-all active:scale-95 flex items-center justify-center ${
               allAnswered
                 ? 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm hover:shadow active:scale-[0.99]'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-400 dark:text-slate-500 cursor-not-allowed'

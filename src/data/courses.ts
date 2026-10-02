@@ -191,7 +191,7 @@ export const COURSES: Record<CourseId, CourseInfo> = {
       'Konsumsi Asynchronous API, Penanganan Race Condition & Optimistic UI Updates',
       'Strategi Rendering (CSR, SSR, SSG, ISR), Hidrasi VDOM & Optimasi Core Web Vitals'
     ],
-    isFree: true,
+    isFree: false,
     price: PRICE_SINGLE_COURSE
   },
   rekayasa_perangkat_lunak: {
@@ -214,7 +214,7 @@ export const COURSES: Record<CourseId, CourseInfo> = {
       'Penjaminan Mutu: Piramida Pengujian, Siklus Red-Green-Refactor TDD & Analisis McCabe',
       'Arsitektur Sistem: Monolit vs Microservices, Teorema CAP, Kontainer Docker & CI/CD'
     ],
-    isFree: true,
+    isFree: false,
     price: PRICE_SINGLE_COURSE
   },
   sistem_operasi: {
@@ -237,7 +237,7 @@ export const COURSES: Record<CourseId, CourseInfo> = {
       'Manajemen Memori: Hardware MMU, Paging, TLB, Page Fault & Algoritma Penggantian LRU',
       'Sistem Berkas Unix Inode, Transaksi Journaling, Penjadwalan I/O Disk & Toleransi RAID'
     ],
-    isFree: true,
+    isFree: false,
     price: PRICE_SINGLE_COURSE
   },
   pemrograman_berorientasi_objek: {
@@ -260,7 +260,7 @@ export const COURSES: Record<CourseId, CourseInfo> = {
       'Polimorfisme Dinamis (Late Binding), Mekanisme Tingkat Rendah VTable/VPtr & RTTI',
       'Abstraksi Arsitektural: Abstract Class vs Interface Kontrak & Pola Dependency Injection'
     ],
-    isFree: true,
+    isFree: false,
     price: PRICE_SINGLE_COURSE
   }
 };

@@ -249,11 +249,11 @@ export const App: React.FC = () => {
       />
 
       {/* Main Page Routing */}
-      <main className="flex-1">
+      <main className="flex-1 pb-24 md:pb-8">
         {isCurrentCourseLocked ? (
           /* Paywall Gate for Locked Courses */
-          <div className="max-w-2xl mx-auto px-4 py-12 sm:py-16 text-center">
-            <div className="bg-white dark:bg-slate-900 border-2 border-amber-300 dark:border-amber-700/80 rounded-3xl p-6 sm:p-10 shadow-lg space-y-6 relative overflow-hidden">
+          <div className="max-w-2xl mx-auto px-4 py-8 sm:py-16 text-center">
+            <div className="bg-white dark:bg-slate-900 border-2 border-amber-300 dark:border-amber-700/80 rounded-3xl p-5 sm:p-10 shadow-lg space-y-6 relative overflow-hidden">
               <div className="w-16 h-16 rounded-2xl bg-amber-50 dark:bg-amber-950/70 border border-amber-200 dark:border-amber-800 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto shadow-inner">
                 <Lock className="w-8 h-8" />
               </div>
@@ -262,7 +262,7 @@ export const App: React.FC = () => {
                 <span className="text-[11px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
                   Kursus Premium Terkunci
                 </span>
-                <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
+                <h2 className="text-xl sm:text-3xl font-black text-slate-900 dark:text-white">
                   Akses {currentCourseInfo.title}
                 </h2>
                 <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-lg mx-auto leading-relaxed">
@@ -286,7 +286,7 @@ export const App: React.FC = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
                 <button
                   onClick={() => handleOpenPayment(activeCourseId)}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-600 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all min-h-[44px]"
                 >
                   <Lock className="w-4 h-4" />
                   <span>Buka Kursus Ini (Rp 10.000)</span>
@@ -294,10 +294,10 @@ export const App: React.FC = () => {
 
                 <button
                   onClick={() => handleOpenPayment()}
-                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all"
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all min-h-[44px]"
                 >
                   <Crown className="w-4 h-4 text-amber-300" />
-                  <span>Buka Semua 6 Kursus (Rp 50.000)</span>
+                  <span>Buka Semua 10 Kursus (Rp 50.000)</span>
                 </button>
               </div>
 
@@ -398,7 +398,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* Clean Minimalist Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 px-4 sm:px-8 mt-16 transition-colors">
+      <footer className="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 px-4 sm:px-8 mt-16 mb-16 md:mb-0 transition-colors">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2">
             {activeCourseId === 'dasar_pemrograman' ? (

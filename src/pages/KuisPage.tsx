@@ -121,7 +121,7 @@ export const KuisPage: React.FC<KuisPageProps> = ({
       )}
 
       {/* Module Selector Tabs */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none no-scrollbar touch-pan-x">
         {moduleList.map((mod, idx) => {
           const isPassed = profile.passedModules.includes(mod.id);
           const isSelected = mod.id === selectedModuleId;
@@ -136,7 +136,7 @@ export const KuisPage: React.FC<KuisPageProps> = ({
             <button
               key={mod.id}
               onClick={() => onSelectModuleId(mod.id)}
-              className={`px-4 py-3 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all flex items-center gap-2 ${
+              className={`min-h-[44px] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border text-xs font-semibold whitespace-nowrap transition-all active:scale-95 flex items-center gap-2 ${
                 isSelected
                   ? 'bg-indigo-600 text-white border-indigo-600 shadow-sm'
                   : !unlocked

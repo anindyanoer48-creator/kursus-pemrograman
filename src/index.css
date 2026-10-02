@@ -33,6 +33,25 @@
   @apply bg-slate-400 dark:bg-slate-600;
 }
 
+/* Mobile Safe Area, Smooth Touch & Carousel Helpers */
+.pb-safe {
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 0.5rem);
+}
+
+.touch-pan-y {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Hide scrollbar on mobile carousels/tabs without breaking scrolling */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* KaTeX custom sizing adjustments */
 .katex-display {
   margin: 0.75rem 0 !important;

@@ -153,20 +153,20 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/75 backdrop-blur-sm animate-fade-in overflow-y-auto">
-      <div className="relative w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border-2 border-slate-200 dark:border-slate-800 overflow-hidden my-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/75 backdrop-blur-sm animate-fade-in overflow-y-auto">
+      <div className="relative w-full max-w-lg max-h-[92vh] flex flex-col bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border-2 border-slate-200 dark:border-slate-800 overflow-hidden my-auto">
         {/* Top Header Ribbon */}
-        <div className="bg-gradient-to-r from-amber-500 via-indigo-600 to-emerald-600 h-2.5 w-full" />
+        <div className="bg-gradient-to-r from-amber-500 via-indigo-600 to-emerald-600 h-2 w-full flex-shrink-0" />
 
-        <div className="p-6 sm:p-7 space-y-5">
+        <div className="p-4 sm:p-7 space-y-4 sm:space-y-5 overflow-y-auto flex-1 touch-pan-y">
           {/* Header Title & Close Button */}
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex items-start justify-between gap-3">
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 text-[10px] font-extrabold border border-emerald-200 dark:border-emerald-800 mb-1">
                 <Lock className="w-3 h-3 text-emerald-600" />
                 <span>QRIS Dinamis • Nominal Terkunci Otomatis</span>
               </div>
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
+              <h2 className="text-lg sm:text-2xl font-black text-slate-900 dark:text-white">
                 Beli Akses Kursus
               </h2>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -176,18 +176,18 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
 
             <button
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-95"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
           {/* Plan Selector: 1 Kursus (Rp 10.000) vs Semua Kursus (Rp 50.000) */}
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3">
             {/* Single Course */}
             <div
               onClick={() => setPlanMode('single')}
-              className={`cursor-pointer rounded-2xl p-3.5 border-2 transition-all flex flex-col justify-between ${
+              className={`cursor-pointer rounded-2xl p-3 sm:p-3.5 border-2 transition-all flex flex-col justify-between active:scale-[0.98] ${
                 planMode === 'single'
                   ? 'border-indigo-600 bg-indigo-50/50 dark:bg-indigo-950/30 ring-2 ring-indigo-500/20 shadow-sm'
                   : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
@@ -200,7 +200,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                 </h3>
               </div>
               <div className="mt-2">
-                <div className="text-base font-black text-indigo-600 dark:text-indigo-400">
+                <div className="text-sm sm:text-base font-black text-indigo-600 dark:text-indigo-400">
                   Rp 10.000
                 </div>
                 <span className="text-[9px] text-slate-400">Akses Penuh Permanen</span>
@@ -210,34 +210,34 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
             {/* All Courses (All-Access Bundle) */}
             <div
               onClick={() => setPlanMode('all')}
-              className={`cursor-pointer rounded-2xl p-3.5 border-2 transition-all flex flex-col justify-between relative overflow-hidden ${
+              className={`cursor-pointer rounded-2xl p-3 sm:p-3.5 border-2 transition-all flex flex-col justify-between relative overflow-hidden active:scale-[0.98] ${
                 planMode === 'all'
                   ? 'border-amber-500 bg-amber-50/50 dark:bg-amber-950/30 ring-2 ring-amber-500/20 shadow-sm'
                   : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700'
               }`}
             >
               <div className="absolute top-0 right-0 bg-amber-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded-bl-lg flex items-center gap-0.5">
-                <Flame className="w-2.5 h-2.5 fill-white" /> HEMAT 10K
+                <Flame className="w-2.5 h-2.5 fill-white" /> HEMAT 50K
               </div>
               <div>
                 <span className="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase block">
                   Paket Lengkap
                 </span>
                 <h3 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
-                  Semua 6 Kursus
+                  Semua 10 Kursus
                 </h3>
               </div>
               <div className="mt-2">
-                <div className="text-base font-black text-amber-600 dark:text-amber-400">
+                <div className="text-sm sm:text-base font-black text-amber-600 dark:text-amber-400">
                   Rp 50.000
                 </div>
-                <span className="text-[9px] text-slate-400">Hemat Rp 10.000</span>
+                <span className="text-[9px] text-slate-400">Hemat Rp 50.000</span>
               </div>
             </div>
           </div>
 
           {/* Genuine Dynamic QRIS Container */}
-          <div className="bg-slate-50 dark:bg-slate-950/70 rounded-3xl p-5 border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
+          <div className="bg-slate-50 dark:bg-slate-950/70 rounded-3xl p-4 sm:p-5 border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center">
             {/* National QRIS Header */}
             <div className="flex items-center justify-between w-full max-w-xs pb-2.5 border-b border-slate-200 dark:border-slate-800 mb-3">
               <div className="flex items-center gap-1.5">
@@ -273,7 +273,7 @@ export const PaymentModal: React.FC<PaymentModalProps> = ({
                   <img
                     src={qrisData?.qrImageUrl}
                     alt="QRIS Dinamis Saweria Resmi"
-                    className="w-52 h-52 sm:w-56 sm:h-56 object-contain rounded-lg"
+                    className="w-48 h-48 sm:w-56 sm:h-56 object-contain rounded-lg"
                   />
                   <div className="absolute inset-x-0 bottom-0.5 flex justify-center">
                     <span className="text-[8px] font-mono font-bold text-slate-500 bg-white/95 px-2 py-0.5 rounded shadow-xs">

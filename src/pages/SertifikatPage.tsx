@@ -160,19 +160,19 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           {isAllPassed ? (
             <>
               <button
                 onClick={triggerConfetti}
-                className="p-2 text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/40 rounded-xl transition-colors border border-amber-200 dark:border-amber-800"
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center p-2 text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-950/40 rounded-xl transition-colors border border-amber-200 dark:border-amber-800 active:scale-95"
                 title="Rayakan!"
               >
                 <Sparkles className="w-4 h-4" />
               </button>
               <button
                 onClick={handlePrint}
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors flex items-center gap-2"
+                className="min-h-[44px] flex-1 sm:flex-initial px-4 py-2 bg-indigo-600 hover:bg-indigo-700 active:scale-95 text-white rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-2"
               >
                 <Printer className="w-4 h-4" /> Cetak / Simpan PDF
               </button>
@@ -180,7 +180,7 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
           ) : (
             <button
               disabled
-              className="px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 rounded-xl text-xs font-semibold cursor-not-allowed flex items-center gap-2"
+              className="min-h-[44px] w-full sm:w-auto px-4 py-2 bg-slate-200 dark:bg-slate-800 text-slate-400 dark:text-slate-500 rounded-xl text-xs font-semibold cursor-not-allowed flex items-center justify-center gap-2"
               title="Luluskan semua kuis terlebih dahulu untuk mencetak"
             >
               <Lock className="w-4 h-4" /> Cetak Terkunci
@@ -191,7 +191,7 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
 
       {/* Lock Warning Notice if not all completed */}
       {!isAllPassed && (
-        <div className="p-5 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="p-4 sm:p-5 bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <div className="flex items-start gap-3">
             <div className="p-2.5 bg-amber-100 dark:bg-amber-900/60 text-amber-700 dark:text-amber-400 rounded-xl flex-shrink-0 mt-0.5">
               <Lock className="w-5 h-5" />
@@ -208,7 +208,7 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
 
           <button
             onClick={() => onNavigate('kuis')}
-            className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors flex items-center gap-1.5 flex-shrink-0"
+            className="w-full sm:w-auto min-h-[44px] px-4 py-2 bg-amber-600 hover:bg-amber-700 active:scale-95 text-white rounded-xl text-xs font-semibold shadow-sm transition-all flex items-center justify-center gap-1.5 flex-shrink-0"
           >
             <span>Buka Halaman Kuis</span>
             <ArrowRight className="w-4 h-4" />
@@ -227,27 +227,34 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
           </span>
         </div>
 
-        <form onSubmit={handleSaveName} className="flex items-center gap-2 w-full sm:w-auto">
+        <form onSubmit={handleSaveName} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 w-full sm:w-auto">
           <input
             type="text"
             value={editingName}
             onChange={(e) => setEditingName(e.target.value)}
-            className="px-3 py-1.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64"
+            className="min-h-[44px] px-3.5 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-semibold text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500 w-full sm:w-64"
           />
           <button
             type="submit"
-            className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-semibold transition-colors flex-shrink-0"
+            className="min-h-[44px] px-4 py-2 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-semibold transition-all active:scale-95 flex items-center justify-center flex-shrink-0"
           >
-            {isSaved ? 'Tersimpan ✓' : 'Update'}
+            {isSaved ? 'Tersimpan ✓' : 'Update Nama'}
           </button>
         </form>
       </div>
 
-      {/* Printable Certificate Canvas */}
-      <div className="relative">
-        {/* Subtle blur overlay if locked */}
-        {!isAllPassed && (
-          <div className="absolute inset-0 z-10 bg-slate-900/40 backdrop-blur-[2px] rounded-3xl flex flex-col items-center justify-center p-6 text-center print:hidden">
+      {/* Mobile Orientation Hint */}
+      <div className="sm:hidden flex items-center gap-2 p-3 bg-indigo-50 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-800 rounded-xl text-xs text-indigo-700 dark:text-indigo-300 print:hidden">
+        <span className="text-base">📱</span>
+        <span>Tips HP: Putar ponsel ke posisi Landscape (horizontal) atau geser ke samping untuk melihat pratinjau sertifikat penuh.</span>
+      </div>
+
+      {/* Printable Certificate Canvas Container */}
+      <div className="overflow-x-auto pb-4 no-scrollbar touch-pan-x">
+        <div className="min-w-[640px] sm:min-w-0 relative">
+          {/* Subtle blur overlay if locked */}
+          {!isAllPassed && (
+            <div className="absolute inset-0 z-10 bg-slate-900/40 backdrop-blur-[2px] rounded-3xl flex flex-col items-center justify-center p-6 text-center print:hidden">
             <div className="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl max-w-md w-full space-y-4">
               <div className="w-12 h-12 bg-amber-100 dark:bg-amber-950/80 text-amber-600 rounded-full flex items-center justify-center mx-auto">
                 <Lock className="w-6 h-6" />
@@ -373,5 +380,6 @@ export const SertifikatPage: React.FC<SertifikatPageProps> = ({
         </div>
       </div>
     </div>
-  );
+  </div>
+);
 };

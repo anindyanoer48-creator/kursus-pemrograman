@@ -95,14 +95,14 @@ export const CheatsheetPage: React.FC<CheatsheetPageProps> = ({
           />
         </div>
 
-        <div className="flex items-center gap-1.5 overflow-x-auto w-full pb-1 sm:pb-0">
+        <div className="flex items-center gap-1.5 overflow-x-auto w-full pb-1 sm:pb-0 scrollbar-none no-scrollbar touch-pan-x">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`text-xs px-3 py-2 rounded-xl whitespace-nowrap font-medium transition-colors ${
+              className={`min-h-[40px] text-xs px-3.5 py-2 rounded-xl whitespace-nowrap font-medium transition-all active:scale-95 ${
                 selectedCategory === cat
-                  ? 'bg-indigo-600 text-white'
+                  ? 'bg-indigo-600 text-white font-semibold shadow-sm'
                   : 'bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'
               }`}
             >
